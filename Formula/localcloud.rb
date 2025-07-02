@@ -9,16 +9,16 @@ class Localcloud < Formula
   # URLs for different architectures
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-darwin-arm64.tar.gz"
-    sha256 "PLACEHOLDER_SHA256_DARWIN_ARM64"
+    sha256 "f95b2c0ad0ee0b9b00b773e2d3047acab42935ad5cfc1dd9830851a29a3007b5"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-darwin-amd64.tar.gz"
-    sha256 "PLACEHOLDER_SHA256_DARWIN_AMD64"
+    sha256 "9fc715b8eb2e68b5604606d2c46fc68da5cbb2bff8aa48a43d78c76530933e88"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-linux-amd64.tar.gz"
-    sha256 "PLACEHOLDER_SHA256_LINUX_AMD64"
+    sha256 "1726d69a6cd3650bf90723fe9d60cdc5d1530790839b928e9bd7655fa86ae791"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-linux-arm64.tar.gz"
-    sha256 "PLACEHOLDER_SHA256_LINUX_ARM64"
+    sha256 "803bbb39e61adc57975e3486313f05a777f2a52d28e219ac8993afb4633730f2"
   end
 
   depends_on "docker" => :recommended
