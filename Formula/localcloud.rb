@@ -8,16 +8,16 @@ class Localcloud < Formula
 
   # URLs for different architectures
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/localcloud/localcloud/releases/download/v#{version}/localcloud-#{version}-darwin-arm64.tar.gz"
+    url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-darwin-arm64.tar.gz"
     sha256 "PLACEHOLDER_SHA256_DARWIN_ARM64"
   elsif OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/localcloud/localcloud/releases/download/v#{version}/localcloud-#{version}-darwin-amd64.tar.gz"
+    url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-darwin-amd64.tar.gz"
     sha256 "PLACEHOLDER_SHA256_DARWIN_AMD64"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/localcloud/localcloud/releases/download/v#{version}/localcloud-#{version}-linux-amd64.tar.gz"
+    url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-linux-amd64.tar.gz"
     sha256 "PLACEHOLDER_SHA256_LINUX_AMD64"
   elsif OS.linux? && Hardware::CPU.arm?
-    url "https://github.com/localcloud/localcloud/releases/download/v#{version}/localcloud-#{version}-linux-arm64.tar.gz"
+    url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-#{version}-linux-arm64.tar.gz"
     sha256 "PLACEHOLDER_SHA256_LINUX_ARM64"
   end
 
@@ -56,7 +56,7 @@ class Localcloud < Formula
         brew install --cask docker
 
       For more information:
-        https://github.com/localcloud/localcloud
+        https://github.com/localcloud-sh/localcloud
     EOS
   end
 

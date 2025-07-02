@@ -19,7 +19,7 @@ declare -A SHAS
 PLATFORMS=("darwin-arm64" "darwin-amd64" "linux-amd64" "linux-arm64")
 
 for PLATFORM in "${PLATFORMS[@]}"; do
-  URL="https://github.com/localcloud/localcloud/releases/download/v${VERSION}/localcloud-${VERSION}-${PLATFORM}.tar.gz"
+  URL="https://github.com/localcloud-sh/localcloud/releases/download/v${VERSION}/localcloud-${VERSION}-${PLATFORM}.tar.gz"
 
   echo "Downloading $PLATFORM..."
   curl -L -o "localcloud-${PLATFORM}.tar.gz" "$URL"
