@@ -13,26 +13,45 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug - Show directory structure
+      - name: Debug - Show environment
         run: |
-          echo "Current directory: $(pwd)"
-          echo "Directory contents:"
+          echo "=== ENVIRONMENT ==="
+          echo "PWD: $(pwd)"
+          echo "VERSION: ${{ github.event.client_payload.version }}"
+          echo ""
+          echo "=== DIRECTORY STRUCTURE ==="
           ls -la
-          echo "Checking for Formula directory:"
+          echo ""
+          echo "=== CHECK FORMULA DIRECTORY ==="
           ls -la Formula/ || echo "Formula directory not found"
+          echo ""
+          echo "=== CHECK SCRIPTS ==="
+          ls -la .github/scripts/ || echo "Scripts directory not found"
+          echo ""
+          echo "=== FORMULA FILE CONTENT ==="
+          cat Formula/localcloud.rb || echo "Formula file not found"
 
-      - name: Update Formula
+      - name: Update Formula Directly
         env:
           VERSION: ${{ github.event.client_payload.version }}
         run: |
-          echo "Updating formula to version $VERSION"
-          chmod +x .github/scripts/update-formula-simple.sh
-          ./.github/scripts/update-formula-simple.sh $VERSION
+          VERSION="${VERSION#v}"
+          echo "Updating to version: $VERSION"
+          
+          # Direct sed command without script
+          echo "=== BEFORE UPDATE ==="
+          grep "version" Formula/localcloud.rb || true
+          
+          # Update version
+          sed -i "s/version \"[0-9.]*\"/version \"$VERSION\"/" Formula/localcloud.rb
+          
+          echo "=== AFTER UPDATE ==="
+          grep "version" Formula/localcloud.rb || true
 
       - name: Commit and Push
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add Formula/localcloud.rb
-          git commit -m "Update LocalCloud to ${{ github.event.client_payload.version }}"
-          git push
+          git commit -m "Update LocalCloud to ${{ github.event.client_payload.version }}" || echo "No changes to commit"
+          git push || echo "Push failed"
