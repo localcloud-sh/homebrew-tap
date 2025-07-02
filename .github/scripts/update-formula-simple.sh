@@ -21,8 +21,8 @@ FORMULA_FILE="Formula/localcloud.rb"
 # Copy current formula to temp
 cp "$FORMULA_FILE" "$TEMP_FILE"
 
-# Update version
-sed -i '' "s/version \".*\"/version \"$VERSION\"/" "$TEMP_FILE"
+# Update version - Linux compatible sed
+sed -i "s/version \"[^\"]*\"/version \"$VERSION\"/" "$TEMP_FILE"
 
 # Download and calculate SHA256 for each platform
 echo "Calculating SHA256 for each platform..."
@@ -59,11 +59,12 @@ SHA_LINUX_ARM64=$(shasum -a 256 "temp-linux-arm64.tar.gz" | awk '{print $1}')
 rm "temp-linux-arm64.tar.gz"
 echo "linux-arm64: $SHA_LINUX_ARM64"
 
-# Replace placeholders
-sed -i '' "s/PLACEHOLDER_SHA256_DARWIN_ARM64/$SHA_DARWIN_ARM64/" "$TEMP_FILE"
-sed -i '' "s/PLACEHOLDER_SHA256_DARWIN_AMD64/$SHA_DARWIN_AMD64/" "$TEMP_FILE"
-sed -i '' "s/PLACEHOLDER_SHA256_LINUX_AMD64/$SHA_LINUX_AMD64/" "$TEMP_FILE"
-sed -i '' "s/PLACEHOLDER_SHA256_LINUX_ARM64/$SHA_LINUX_ARM64/" "$TEMP_FILE"
+# Update SHA256 values in the formula
+# Find and replace each SHA256 line
+sed -i "0,/sha256 \"[^\"]*\"/s//sha256 \"$SHA_DARWIN_ARM64\"/" "$TEMP_FILE"
+sed -i "0,/sha256 \"[^\"]*\"/! {0,/sha256 \"[^\"]*\"/s//sha256 \"$SHA_DARWIN_AMD64\"/}" "$TEMP_FILE"
+sed -i "0,/sha256 \"[^\"]*\"/! {0,/sha256 \"[^\"]*\"/! {0,/sha256 \"[^\"]*\"/s//sha256 \"$SHA_LINUX_AMD64\"/}}" "$TEMP_FILE"
+sed -i "0,/sha256 \"[^\"]*\"/! {0,/sha256 \"[^\"]*\"/! {0,/sha256 \"[^\"]*\"/! {0,/sha256 \"[^\"]*\"/s//sha256 \"$SHA_LINUX_ARM64\"/}}}" "$TEMP_FILE"
 
 # Move temp file back
 mv "$TEMP_FILE" "$FORMULA_FILE"
