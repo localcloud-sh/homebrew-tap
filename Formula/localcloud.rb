@@ -3,7 +3,7 @@
 class Localcloud < Formula
   desc "AI Development at Zero Cost - Run AI models locally with no API costs"
   homepage "https://localcloud.ai"
-  version "0.1.0"
+  version "0.1.1"
   license "Apache-2.0"
 
   # URLs for different architectures
