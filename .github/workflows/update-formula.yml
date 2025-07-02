@@ -13,6 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Debug - Show directory structure
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
+          echo "Checking for Formula directory:"
+          ls -la Formula/ || echo "Formula directory not found"
+
       - name: Update Formula
         env:
           VERSION: ${{ github.event.client_payload.version }}
