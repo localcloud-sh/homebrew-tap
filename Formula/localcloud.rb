@@ -3,22 +3,22 @@
 class Localcloud < Formula
   desc "AI Development at Zero Cost - Run AI models locally with no API costs"
   homepage "https://localcloud.ai"
-  version "0.2.1"
+  version "0.2.2"
   license "Apache-2.0"
 
   # URLs for different architectures
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-v#{version}-darwin-arm64.tar.gz"
-    sha256 "ff3ee7314ad38f9428cb5bd2d82d190df97977ee27d101ed0db58a4b84fb5512"
+    sha256 "0876e29a76db3d7cdf25249aea8b72b4b1fae532eba090f600f947d693952b9e"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-v#{version}-darwin-amd64.tar.gz"
-    sha256 "5c39f7cdc4dfbc61f2f25379e15808b28acf2be14708dff58fd394630b5948dd"
+    sha256 "fbf53a093f87368c7ccdb57253dadfc55922ef84e6f932e0bce88b81367e47e3"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-v#{version}-linux-amd64.tar.gz"
-    sha256 "81832e5d22f2d83300e8356290db1992b8c1c0680d833fb786d2b6006700f247"
+    sha256 "2a3b94439ff4d7b740e725b71e7dbcf16079ff18069acbdd33e6ecdd91c3790a"
   elsif OS.linux? && Hardware::CPU.arm?
     url "https://github.com/localcloud-sh/localcloud/releases/download/v#{version}/localcloud-v#{version}-linux-arm64.tar.gz"
-    sha256 "fb85e15454c19d08f8fb006dc47d2301059f46ccfd2aba113c06f3c875de8da6"
+    sha256 "e4a5e4322c75cd8b7eb110528fdb8d25ce46fa819dab1fdd68938ce3fbd68954"
   end
 
   depends_on "docker" => :recommended
